@@ -1,21 +1,18 @@
+FROM caddy:builder AS builder
+
+# Build Caddy with the required plugins
+RUN xcaddy build \
+    --with github.com/caddy-dns/cloudflare \
+    --with github.com/lucaslorentz/caddy-docker-proxy/v2
+
+# Use the official Caddy image for the final image
 FROM caddy:latest
 
-# Install the Cloudflare DNS plugin
-RUN caddy add github.com/caddy-dns/cloudflare
+# Copy the custom-built Caddy binary from the builder stage
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 
-# Install the Docker Label plugin
-RUN caddy add github.com/lucaslorentz/caddy-docker-proxy/plugin/labels
-
-# You can add any other plugins you need here in a similar fashion
-# For example:
-# RUN caddy add github.com/other/plugin
-
-# The base Caddy image already exposes ports 80 and 443
-# You don't need to explicitly expose them again here.
-
-# Define the default command to run Caddy
-# You'll likely want to mount your Caddyfile into the container
+# Set the default command to run Caddy
 CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
 
-# You can optionally specify a working directory
+# Optional: Set the working directory
 # WORKDIR /app
