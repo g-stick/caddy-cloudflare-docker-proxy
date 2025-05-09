@@ -37,5 +37,5 @@ jobs:
           push: true
           platforms: linux/arm64,linux/amd64
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
+            ghcr.io/${{ github.repository_owner }}/caddy-cloudflare-docker-proxy:latest
+            ghcr.io/${{ github.repository_owner }}/caddy-cloudflare-docker-proxy:${{ github.sha }}
