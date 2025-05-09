@@ -1,4 +1,4 @@
-name: Build and Push Custom Caddy Image
+name: Build and Push Custom Caddy Image 
 
 on:
   push:
