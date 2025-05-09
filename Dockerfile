@@ -1,4 +1,4 @@
-# Use multi-platform base image
+# Use multi-platform base image 
 FROM --platform=$BUILDPLATFORM caddy:builder AS builder
 
 RUN xcaddy build \
