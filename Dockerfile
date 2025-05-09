@@ -1,4 +1,5 @@
-FROM caddy:builder AS builder
+# Use multi-platform base image
+FROM --platform=$BUILDPLATFORM caddy:builder AS builder
 
 RUN xcaddy build \
     --with github.com/caddy-dns/cloudflare \
